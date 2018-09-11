@@ -39,4 +39,15 @@ export default class Board {
             }
         })
     }
+
+    isValidMove(x, y) {
+        var flag = false;
+        this.squareList.forEach(function(square, index) {
+            if(square.x == x && square.y == y) {
+                flag = square.sign.length == 0;
+            }
+        });
+
+        return flag;
+    }
 }

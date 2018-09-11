@@ -22,8 +22,12 @@ function addEventListenerToBoard() {
 function handleMove(div) {
     let positionStr = div.getAttribute('data-position');
     let positionArray = positionStr.split('.');
-    div.innerHTML = sign;
-    board.setSign(positionArray[0] - 1, positionArray[1] - 1, sign);
+    let x = positionArray[0] - 1;
+    let y = positionArray[1] - 1;
+    if (board.isValidMove(x, y)) {
+        div.innerHTML = sign;
+        board.setSign(x, y, sign);
+    }
 }
 
 
