@@ -1,4 +1,4 @@
-class Square {
+export default class Square {
 
     constructor(x, y) {
         this.x = x;
@@ -10,6 +10,11 @@ class Square {
         let div = document.createElement('div');
         div.setAttribute('class', 'field');
         div.setAttribute('data-position', (this.x+1) + '.' + (this.y+1));
+        // div.addEventListener("click", function(){
+        //     console.log(div.getAttribute('data-position'));
+        //
+        //
+        // });
         div.innerHTML = this.sign;
 
         // div.addEventListener('click', this.testAjax);
@@ -32,7 +37,7 @@ class Square {
     //             console.log('Request failed.  Returned status of ' + xhr.status);
     //         }
     //     };
-    //     xhr.send();        
+    //     xhr.send();
     // }
-    
+
 }
