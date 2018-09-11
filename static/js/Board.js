@@ -31,6 +31,4 @@ export default class Board {
             container.appendChild(square.getElement());
         })
     }
-
-    
 }
