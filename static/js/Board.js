@@ -1,4 +1,6 @@
-class Board {
+import Square from './Square.js';
+
+export default class Board {
 
     constructor(quantity) {
         this.quantity = quantity;
@@ -29,4 +31,6 @@ class Board {
             container.appendChild(square.getElement());
         })
     }
+
+    
 }
