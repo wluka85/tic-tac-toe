@@ -17,7 +17,7 @@
 
 class Main {
     static init() {
-        let board = new Board(9);
+        let board = new Board(25);
         board.drawBoard();
     }    
 }

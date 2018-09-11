@@ -52,8 +52,8 @@ table {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  width: 306px;
-  height: 306px;
+  width: 510px;
+  height: 510px;
 }
 
 .field {

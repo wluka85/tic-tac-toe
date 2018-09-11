@@ -22,17 +22,17 @@ class Square {
     }
 
     // testAjax() {
-    //     let xhr = new XMLHttpRequest();
-    //     xhr.open('GET', '/api/set-sign');
-    //     xhr.onload = function() {
-    //         if (xhr.status === 200) {
-    //             console.log('User\'s name is ' + xhr.responseText);
+    //     let httpRequest = new XMLHttpRequest();
+    //     httpRequest.open('GET', '/api/set-sign');
+    //     httpRequest.onload = function() {
+    //         if (httpRequest.status === 200) {
+    //             console.log('User\'s name is ' + httpRequest.responseText);
     //         }
     //         else {
-    //             console.log('Request failed.  Returned status of ' + xhr.status);
+    //             console.log('Request failed.  Returned status of ' + httpRequest.status);
     //         }
     //     };
-    //     xhr.send();        
+    //     httpRequest.send();        
     // }
     
 }
