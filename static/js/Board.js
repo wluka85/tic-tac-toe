@@ -1,10 +1,5 @@
 import Square from "/js/Square.js";
 
-
-function sendBoardJSON(squareList) {
-    console.log(squareList);
-}
-
 export default class Board {
 
     constructor(quantity) {
@@ -20,11 +15,8 @@ export default class Board {
 
         for (let y=0; y<Math.sqrt(this.quantity); y++) {
             for (let x=0; x<Math.sqrt(this.quantity); x++) {
-
                 let square = new Square(x, y);
-                squareList.push(square);
-                // container.appendChild(div);
-            }
+                squareList.push(square);            }
         }
         return squareList;
     };
@@ -37,21 +29,14 @@ export default class Board {
         this.squareList.forEach(function(square, index) {
             let div = square.getElement();
             container.appendChild(div);
-            div.addEventListener("click", function(){
-                let positionStr = div.getAttribute('data-position');
-                let positionArray = positionStr.split('.');
-                square.setSign('X');
-                // console.log(square);
-                // console.log(squareArray);
-                div.innerHTML = 'X';
-                sendBoardJSON(squareArray);
-                // console.log(positionArray);
-                // console.log(squareArray);
-
-                // squareArray.
-            });
         })
     }
 
-
+    setSign(x, y, sign) {
+        this.squareList.forEach(function(square, index) {
+            if(square.x == x && square.y == y) {
+                square.setSign(sign);
+            }
+        })
+    }
 }
