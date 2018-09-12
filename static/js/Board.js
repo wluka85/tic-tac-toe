@@ -5,7 +5,7 @@ export default class Board {
     constructor(quantity) {
         this.quantity = quantity;
         this.squareList = this.prepareBoard();
-        console.log(this.squareList);
+        //console.log(this.squareList);
     }
 
 

@@ -61,5 +61,10 @@ table {
   height: 100px;
   background: grey;
   border: 1px solid black;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+
 
 }
