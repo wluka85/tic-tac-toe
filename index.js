@@ -35,6 +35,7 @@ app.post('/api/set-turn', (req, res) => {
     } else {
         app.set('turnSign', "X");
     }
+    res.json({success : 'true'})
     console.log("Następny ruch: " + app.get('turnSign'));
 });
 
@@ -43,8 +44,6 @@ app.get('/tic-tac-toe', (req, res) => res.sendFile('index.html', { root: '.' }))
 
 app.post('/api/board', (req, res) => {
     let board = req.body;
-    // const mockJson = '{"quantity":9,"squareList":[{"x":0,"y":0,"sign":"X"},{"x":1,"y":0,"sign":""},{"x":2,"y":0,"sign":""},{"x":0,"y":1,"sign":""},{"x":1,"y":1,"sign":"X"},{"x":2,"y":1,"sign":"X"},{"x":0,"y":2,"sign":""},{"x":1,"y":2,"sign":""},{"x":2,"y":2,"sign":""}]}';
-    // board = JSON.parse(mockJson);
 
     app.set('board', board);
     res.json({success : 'true'})
@@ -59,8 +58,6 @@ app.get('/api/board', (req, res) => {
 
 app.post('/api/turn', (req, res) => {
     let sign = req.body;
-    // const mockJson = '{"quantity":9,"squareList":[{"x":0,"y":0,"sign":"X"},{"x":1,"y":0,"sign":""},{"x":2,"y":0,"sign":""},{"x":0,"y":1,"sign":""},{"x":1,"y":1,"sign":"X"},{"x":2,"y":1,"sign":"X"},{"x":0,"y":2,"sign":""},{"x":1,"y":2,"sign":""},{"x":2,"y":2,"sign":""}]}';
-    // board = JSON.parse(mockJson);
 
     app.set('sign', sign);
     res.json({success : 'true'})

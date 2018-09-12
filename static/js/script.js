@@ -8,15 +8,15 @@ var turn = "";
 board.drawBoard();
 
 var button = document.getElementById("refresh");
-        button.addEventListener("click", function() {
-            refreshBoard(board);
-        });
+button.addEventListener("click", function() {
+    refreshBoard(board);
+});
 addEventListenerToBoard();
 
 var buttonStartGame = document.getElementById("start-game");
-        buttonStartGame.addEventListener("click", function() {
-            startGame();
-        });
+buttonStartGame.addEventListener("click", function() {
+    startGame();
+});
 
 
 function startGame() {
@@ -38,11 +38,11 @@ function addEventListenerToBoard() {
 
     container.forEach(function(div, index) {
         div.addEventListener("click", function() {
-            console.log("Czy to twój ruch: " + checkIfYourTurn());
-            if (checkIfYourTurn()) {
-                console.log("wszedłem do pierwszego w ifie");
-                handleMove(div, squareList);
-            }
+            checkIfYourTurn(div, squareList);
+            // if (checkIfYourTurn(div, squareList)) {
+            //     console.log("wszedłem do pierwszego w ifie");
+            //     //handleMove(div, squareList);
+            // }
         });
     })
 }
@@ -71,7 +71,7 @@ function sendBoardJSON(squareList) {
     })
         .then((response) => response.json())
         .then((data) => {
-
+            console.log(data.success);
         })
 }
 
@@ -86,6 +86,8 @@ function refreshBoard(board) {
                 console.log(data);
                 for (let i=0; i<board.squareList.length; i++) {
                     container[i].innerHTML = data[i].sign;
+                    board.squareList[i].setSign(data[i].sign);
+
                 }
             })
 
@@ -93,8 +95,7 @@ function refreshBoard(board) {
     }
 
 
-function checkIfYourTurn() {
-
+function checkIfYourTurn(div, squareList) {
 
     fetch('/api/check-turn', {
         method: 'GET'
@@ -104,15 +105,18 @@ function checkIfYourTurn() {
 
             console.log("Z serwera: " + data + "nasze: " + sign);
             if (data == sign) {
-                turn = true;
-            } else {
-                turn = false;
-            }
+                //turn = true;
+
+                handleMove(div, squareList)
+            } 
+            // else {
+            //     turn = false;
+            // }
         })
 
-        console.log(turn);
+        //console.log(turn);
 
-    return turn;
+    //return turn;
 }
 
 function sendMadeMove() {
