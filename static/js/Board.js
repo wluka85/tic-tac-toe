@@ -21,6 +21,15 @@ export default class Board {
         return squareList;
     };
 
+    deleteDiv() {
+        let fieldArray = document.querySelectorAll('.field');
+        let parent = document.getElementById('board');
+
+        for (let i=0; i<fieldArray.length; i++) {
+            parent.removeChild(fieldArray[i]);
+        }
+    }
+
 
 
     drawBoard() {
