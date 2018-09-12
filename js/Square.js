@@ -10,11 +10,19 @@ class Square {
         let div = document.createElement('div');
         div.setAttribute('class', 'field');
         div.setAttribute('data-position', (this.x+1) + '.' + (this.y+1));
-        div.innerHTML = this.sign;
-
+        // div.addEventListener("click", function(){
+        //     console.log(div.getAttribute('data-position'));
+        //
+        //
+        // });
+        this.setFillout(div);
         // div.addEventListener('click', this.testAjax);
 
         return div;
+    }
+
+    setFillout(div) {
+        div.innerHTML = this.sign;
     }
 
     setSign(sign) {
