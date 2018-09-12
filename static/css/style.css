@@ -65,6 +65,11 @@ table {
   justify-content: center;
   align-items: center;
   font-size: 70px;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif
+}
 
-
+.field:hover {
+	background: #666;
+	cursor: pointer;
 }
