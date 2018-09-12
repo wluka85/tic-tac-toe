@@ -60,33 +60,60 @@ export default class Board {
     }
 
     isWin(sign) {
-        signCounter(x);
-        signCounter(y);
-        signCounterAcross();
+        this.signCounterHorizontal(sign);
+        this.signCounterVertical(sign);
+        this.signCounterAcross(sign);
     }
 
-    signCounterHorizontalVertical(XorYproperty) {
+    signCounterVertical(sign) {
         let counter1 = 0;
         let counter2 = 0;
         let counter3 = 0;
         this.squareList.forEach(function(square, index) {
-            if(square.XorYproperty == 0 && square.sign == sign){
+            if(square.x == 0 && square.sign == sign){
                 counter1++;
+                console.log("counter1++");
             }
-            if(square.XorYproperty == 1 && square.sign == sign){
+            if(square.x == 1 && square.sign == sign){
                 counter2++;
+                console.log("counter2++");
             }
-            if(square.XorYproperty == 2 && square.sign == sign){
+            if(square.x == 2 && square.sign == sign){
                 counter3++;
+                console.log("counter3++");
             }
         });
         if(counter1 == 3 || counter2 == 3 || counter3 == 3){
             this.win = true;
-            console.log("wygrales gosciu!");
+            console.log("wygrales gosciu vertical!");
         }
     }
 
-    signCounterAcross() {
+    signCounterHorizontal(sign) {
+        let counter1 = 0;
+        let counter2 = 0;
+        let counter3 = 0;
+        this.squareList.forEach(function(square, index) {
+            if(square.y == 0 && square.sign == sign){
+                counter1++;
+                console.log("counter1++");
+            }
+            if(square.y == 1 && square.sign == sign){
+                counter2++;
+                console.log("counter2++");
+            }
+            if(square.y == 2 && square.sign == sign){
+                counter3++;
+                console.log("counter3++");
+            }
+        });
+        if(counter1 == 3 || counter2 == 3 || counter3 == 3){
+            this.win = true;
+            console.log("wygrales gosciu Horizontal!");
+        }
+    }
+
+    signCounterAcross(sign) {
         let counter1 = 0;
         let counter2 = 0;
         this.squareList.forEach(function(square, index) {
@@ -97,9 +124,9 @@ export default class Board {
                 counter2++;
             }
         });
-        if(counter1 == 3 || counter2 == 3 || counter3 == 3){
+        if(counter1 == 3 || counter2 == 3){
             this.win = true;
-            console.log("wygrales gosciu!");
+            console.log("wygrales gosciu Across!");
         }
     }
 }       

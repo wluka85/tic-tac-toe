@@ -31,7 +31,7 @@ function handleMove(div) {
     if (board.isValidMove(x, y)) {
         div.innerHTML = sign;
         board.setSign(x, y, sign);
-        isWin(sign)
+        board.isWin(sign);
     }
 }
 
