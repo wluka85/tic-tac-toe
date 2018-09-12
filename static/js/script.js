@@ -1,13 +1,35 @@
 import Board from './Board.js';
 
 var board = new Board(9);
-var sign = "O";
+var sign = "";
+
+var turn = "";
+
 board.drawBoard();
+
 var button = document.getElementById("refresh");
         button.addEventListener("click", function() {
             refreshBoard(board);
         });
 addEventListenerToBoard();
+
+var buttonStartGame = document.getElementById("start-game");
+        buttonStartGame.addEventListener("click", function() {
+            startGame();
+        });
+
+
+function startGame() {
+    sendBoardJSON(board.squareList);
+
+    fetch('/api/get-sign', {
+        method: 'GET'
+    })  // set the path; the method is GET by default, but can be modified with a second parameter
+        .then((response) => response.json())  // parse JSON format into JS object
+        .then((data) => {
+            sign = data;
+        })
+}
 
 
 function addEventListenerToBoard() {
@@ -16,21 +38,27 @@ function addEventListenerToBoard() {
 
     container.forEach(function(div, index) {
         div.addEventListener("click", function() {
-            handleMove(div);
-            sendBoardJSON(squareList);
+            console.log("Czy to twój ruch: " + checkIfYourTurn());
+            if (checkIfYourTurn()) {
+                console.log("wszedłem do pierwszego w ifie");
+                handleMove(div, squareList);
+            }
         });
     })
 }
 
 
-function handleMove(div) {
+function handleMove(div, squareList) {
     let positionStr = div.getAttribute('data-position');
     let positionArray = positionStr.split('.');
     let x = positionArray[0] - 1;
     let y = positionArray[1] - 1;
     if (board.isValidMove(x, y)) {
+        console.log("jestem w ifie");
         div.innerHTML = sign;
         board.setSign(x, y, sign);
+        sendBoardJSON(board.squareList);
+        sendMadeMove();
     }
 }
 
@@ -43,7 +71,7 @@ function sendBoardJSON(squareList) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+
         })
 }
 
@@ -55,7 +83,6 @@ function refreshBoard(board) {
         })  // set the path; the method is GET by default, but can be modified with a second parameter
             .then((response) => response.json())  // parse JSON format into JS object
             .then((data) => {
-                console.log("tojeto");
                 console.log(data);
                 for (let i=0; i<board.squareList.length; i++) {
                     container[i].innerHTML = data[i].sign;
@@ -64,3 +91,38 @@ function refreshBoard(board) {
 
 
     }
+
+
+function checkIfYourTurn() {
+
+
+    fetch('/api/check-turn', {
+        method: 'GET'
+    })  // set the path; the method is GET by default, but can be modified with a second parameter
+        .then((response) => response.json())  // parse JSON format into JS object
+        .then((data) => {
+
+            console.log("Z serwera: " + data + "nasze: " + sign);
+            if (data == sign) {
+                turn = true;
+            } else {
+                turn = false;
+            }
+        })
+
+        console.log(turn);
+
+    return turn;
+}
+
+function sendMadeMove() {
+    fetch('/api/set-turn', {
+        method: 'POST',
+        headers: new Headers({'content-type': 'application/json'}),
+        body: JSON.stringify({sign: sign})
+    })
+        .then((response) => response.json())
+        .then((data) => {
+
+        })
+}
