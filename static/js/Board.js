@@ -63,6 +63,7 @@ export default class Board {
         this.signCounterHorizontal(sign);
         this.signCounterVertical(sign);
         this.signCounterAcross(sign);
+        this.isDraw();
     }
 
     signCounterVertical(sign) {
@@ -130,19 +131,17 @@ export default class Board {
         }
     }
 
-    isWinHorizontal() {
+    isDraw() {
         let counter = 0;
-        for (let i = 0; i < this.squareList.length; i++) {
-            if (this.squareList[i].sign == this.squareList[i+1].sign) {
+        this.squareList.forEach(function(square, index) {
+            if(square.sign == "O" || square.sign == "X"){
                 counter++;
-                if (counter == 5){
-                    console.log("wygrales gosciu horizontal 5!");
-                }
             }
-            else{
-                counter = 0;
+        });
+            if(counter == 9){
+                this.win = true;
+                console.log("remisior")
             }
-            
-        }
     }
+    
 }       
