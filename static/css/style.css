@@ -29,6 +29,9 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	line-height: 1;
 }
 ol, ul {
@@ -48,6 +51,7 @@ table {
 }
 
 #board {
+  padding-top: 10%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -61,7 +65,7 @@ table {
   height: 100px;
   background: grey;
   border: 1px solid black;
-  display: flex;  
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 70px;
@@ -204,4 +208,3 @@ img {
 		background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
 	}
 }
-  

@@ -40,7 +40,9 @@ app.post('/api/set-turn', (req, res) => {
 });
 
 
-app.get('/tic-tac-toe', (req, res) => res.sendFile('index.html', { root: '.' }));
+app.get('/tic-tac-toe', (req, res) => res.sendFile('start.html', { root: '.' }));
+
+app.get('/start-game', (req, res) => res.sendFile('index.html', { root: '.' }));
 
 app.post('/api/board', (req, res) => {
     let board = req.body;

@@ -3,7 +3,6 @@ import Board from './Board.js';
 var board = new Board(9);
 var sign = "";
 
-
 board.drawBoard();
 
 // var button = document.getElementById("refresh");
@@ -11,13 +10,7 @@ board.drawBoard();
 //     refreshBoard(board);
 // });
 addEventListenerToBoard();
-
-var buttonStartGame = document.getElementById("start-game");
-buttonStartGame.addEventListener("click", function() {
-    startGame();
-
-
-});
+startGame();
 
 
 function startGame() {
@@ -25,8 +18,8 @@ function startGame() {
     setInterval(function() {refreshBoard(board)}, 1000);
     fetch('/api/get-sign', {
         method: 'GET'
-    })  // set the path; the method is GET by default, but can be modified with a second parameter
-        .then((response) => response.json())  // parse JSON format into JS object
+    })
+        .then((response) => response.json())
         .then((data) => {
             sign = data;
 
@@ -36,7 +29,6 @@ function startGame() {
                 document.getElementById("board").setAttribute('class', '');
             }
         })
-
 }
 
 
@@ -48,11 +40,6 @@ function addEventListenerToBoard() {
     container.forEach(function(div, index) {
         div.addEventListener("click", function() {
             checkIfYourTurn(div, squareList);
-
-            // if (checkIfYourTurn(div, squareList)) {
-            //     console.log("wszedłem do pierwszego w ifie");
-            //     //handleMove(div, squareList);
-            // }
         });
     })
 }
@@ -91,8 +78,8 @@ function refreshBoard(board) {
 
         fetch('/api/board', {
             method: 'GET'
-        })  // set the path; the method is GET by default, but can be modified with a second parameter
-            .then((response) => response.json())  // parse JSON format into JS object
+        })
+            .then((response) => response.json())
             .then((data) => {
                 console.log("odświeżam");
                 for (let i=0; i<board.squareList.length; i++) {
@@ -105,34 +92,24 @@ function refreshBoard(board) {
                 }
                 
             })
-
-
-    }
+}
 
 
 function checkIfYourTurn(div, squareList) {
 
     fetch('/api/check-turn', {
         method: 'GET'
-    })  // set the path; the method is GET by default, but can be modified with a second parameter
-        .then((response) => response.json())  // parse JSON format into JS object
+    })
+        .then((response) => response.json())
         .then((data) => {
 
             console.log("Z serwera: " + data + "nasze: " + sign);
             if (data == sign) {
-                //turn = true;
-
                 handleMove(div, squareList)
             }
-            // else {
-            //     turn = false;
-            // }
         })
-
-        //console.log(turn);
-
-    //return turn;
 }
+
 
 function sendMadeMove() {
     fetch('/api/set-turn', {
