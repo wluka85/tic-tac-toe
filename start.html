@@ -10,7 +10,7 @@
 <body class="bodyStart">
     <div class="logo"><img src="/home/cyan/codecool/web/tic-tac-toe/static/img/unnamed.jpg" alt="logo"></div>
 
-    <button class="bubbly-button">Start!</button>
+    <button onclick="location.href='javascript:delay()'"  class="bubbly-button">Start!</button>
 
     <script>
         var animateButton = function(e) {
@@ -31,6 +31,9 @@
     bubblyButtons[i].addEventListener('click', animateButton, false);
     }
 
+    function delay () {
+    setTimeout( function() { window.location = 'index.html' }, 500 );
+    }   
     </script>
 </body>
 </html>
