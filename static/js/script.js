@@ -11,7 +11,10 @@ startGame();
 
 function startGame() {
     sendBoardJSON(board.squareList);
-    setInterval(function() {refreshBoard(board)}, 1000);
+    setInterval(function() {
+        refreshBoard(board);
+        handleGameOver(board);
+    }, 1000);
     fetch('/api/get-sign', {
         method: 'GET'
     })
@@ -47,7 +50,6 @@ function handleMove(div, squareList) {
         board.setSign(x, y, sign);
         sendBoardJSON(board.squareList);
         sendMadeMove();
-        // board.isWin(sign);
     }
 }
 
@@ -106,4 +108,13 @@ function sendMadeMove() {
         .then((response) => response.json())
         .then((data) => {
         })
+}
+
+
+function handleGameOver(board) {
+    if (board.isWin(sign)) {
+        window.location.href = "won-game";
+    } else if (board.isLost(sign)) {
+        window.location.href = "lost-game";
+    }
 }

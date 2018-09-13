@@ -63,6 +63,22 @@ export default class Board {
         this.signCounterHorizontal(sign);
         this.signCounterVertical(sign);
         this.signCounterAcross(sign);
+
+        return this.win;
+    }
+
+    isLost(sign) {
+        if (sign == "X") {
+            sign = "O";
+        } else {
+            sign = "X";
+        }
+
+        this.signCounterHorizontal(sign);
+        this.signCounterVertical(sign);
+        this.signCounterAcross(sign);
+
+        return this.win;
     }
 
     signCounterVertical(sign) {
@@ -142,7 +158,7 @@ export default class Board {
             else{
                 counter = 0;
             }
-            
+
         }
     }
-}       
+}

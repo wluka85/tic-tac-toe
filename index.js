@@ -44,6 +44,10 @@ app.get('/tic-tac-toe', (req, res) => res.sendFile('start.html', { root: '.' }))
 
 app.get('/start-game', (req, res) => res.sendFile('index.html', { root: '.' }));
 
+app.get('/won-game', (req, res) => res.sendFile('won.html', { root: '.' }));
+
+app.get('/lost-game', (req, res) => res.sendFile('lost.html', { root: '.' }));
+
 app.post('/api/board', (req, res) => {
     let board = req.body;
 
