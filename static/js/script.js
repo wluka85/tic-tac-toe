@@ -3,7 +3,6 @@ import Board from './Board.js';
 var board = new Board(9);
 var sign = "";
 
-var turn = "";
 
 board.drawBoard();
 
@@ -16,29 +15,35 @@ addEventListenerToBoard();
 var buttonStartGame = document.getElementById("start-game");
 buttonStartGame.addEventListener("click", function() {
     startGame();
+
+
 });
 
 
 function startGame() {
     sendBoardJSON(board.squareList);
-
+    setInterval(function() {refreshBoard(board)}, 1000);
     fetch('/api/get-sign', {
         method: 'GET'
     })  // set the path; the method is GET by default, but can be modified with a second parameter
         .then((response) => response.json())  // parse JSON format into JS object
         .then((data) => {
             sign = data;
+
         })
+
 }
 
 
 function addEventListenerToBoard() {
+
     let container = document.querySelectorAll('.field');
     let squareList = board.squareList;
 
     container.forEach(function(div, index) {
         div.addEventListener("click", function() {
             checkIfYourTurn(div, squareList);
+
             // if (checkIfYourTurn(div, squareList)) {
             //     console.log("wszedłem do pierwszego w ifie");
             //     //handleMove(div, squareList);
@@ -83,7 +88,7 @@ function refreshBoard(board) {
         })  // set the path; the method is GET by default, but can be modified with a second parameter
             .then((response) => response.json())  // parse JSON format into JS object
             .then((data) => {
-                console.log(data);
+                console.log("odświeżam");
                 for (let i=0; i<board.squareList.length; i++) {
                     container[i].innerHTML = data[i].sign;
                     board.squareList[i].setSign(data[i].sign);
@@ -108,7 +113,7 @@ function checkIfYourTurn(div, squareList) {
                 //turn = true;
 
                 handleMove(div, squareList)
-            } 
+            }
             // else {
             //     turn = false;
             // }
