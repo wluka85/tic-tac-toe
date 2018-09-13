@@ -7,17 +7,19 @@ var sign = "";
 board.drawBoard();
 
 var button = document.getElementById("refresh");
-button.addEventListener("click", function() {
-    refreshBoard(board);
-});
+// button.addEventListener("click", function() {
+//     refreshBoard(board);
+// });
 addEventListenerToBoard();
 
-var buttonStartGame = document.getElementById("start-game");
-buttonStartGame.addEventListener("click", function() {
-    startGame();
+startGame();
 
-
-});
+// var buttonStartGame = document.getElementById("start-game");
+// buttonStartGame.addEventListener("click", function() {
+//     startGame();
+//
+//
+// });
 
 
 function startGame() {
