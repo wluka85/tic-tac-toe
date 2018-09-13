@@ -3,6 +3,7 @@ import Square from "/js/Square.js";
 export default class Board {
 
     constructor(quantity) {
+        this.win = false;
         this.quantity = quantity;
         this.squareList = this.prepareBoard();
         //console.log(this.squareList);
@@ -30,8 +31,6 @@ export default class Board {
         }
     }
 
-
-
     drawBoard() {
         let container = document.getElementById('board');
         let squareArray = this.squareList;
@@ -50,7 +49,7 @@ export default class Board {
     }
 
     isValidMove(x, y) {
-        var flag = false;
+        let flag = false;
         this.squareList.forEach(function(square, index) {
             if(square.x == x && square.y == y) {
                 flag = square.sign.length == 0;
@@ -59,4 +58,91 @@ export default class Board {
 
         return flag;
     }
-}
+
+    isWin(sign) {
+        this.signCounterHorizontal(sign);
+        this.signCounterVertical(sign);
+        this.signCounterAcross(sign);
+    }
+
+    signCounterVertical(sign) {
+        let counter1 = 0;
+        let counter2 = 0;
+        let counter3 = 0;
+        this.squareList.forEach(function(square, index) {
+            if(square.x == 0 && square.sign == sign){
+                counter1++;
+                console.log("counter1++");
+            }
+            if(square.x == 1 && square.sign == sign){
+                counter2++;
+                console.log("counter2++");
+            }
+            if(square.x == 2 && square.sign == sign){
+                counter3++;
+                console.log("counter3++");
+            }
+        });
+        if(counter1 == 3 || counter2 == 3 || counter3 == 3){
+            this.win = true;
+            console.log("wygrales gosciu vertical!");
+        }
+    }
+
+    signCounterHorizontal(sign) {
+        let counter1 = 0;
+        let counter2 = 0;
+        let counter3 = 0;
+        this.squareList.forEach(function(square, index) {
+            if(square.y == 0 && square.sign == sign){
+                counter1++;
+                console.log("counter1++");
+            }
+            if(square.y == 1 && square.sign == sign){
+                counter2++;
+                console.log("counter2++");
+            }
+            if(square.y == 2 && square.sign == sign){
+                counter3++;
+                console.log("counter3++");
+            }
+        });
+        if(counter1 == 3 || counter2 == 3 || counter3 == 3){
+            this.win = true;
+            console.log("wygrales gosciu Horizontal!");
+        }
+    }
+
+    signCounterAcross(sign) {
+        let counter1 = 0;
+        let counter2 = 0;
+        this.squareList.forEach(function(square, index) {
+            if(square.x == square.y && square.sign == sign){
+                counter1++;
+            }
+            if(square.x + square.y == 2 && square.sign == sign){
+                counter2++;
+            }
+        });
+        if(counter1 == 3 || counter2 == 3){
+            this.win = true;
+            console.log("wygrales gosciu Across!");
+        }
+    }
+
+    isWinHorizontal() {
+        let counter = 0;
+        for (let i = 0; i < this.squareList.length; i++) {
+            if (this.squareList[i].sign == this.squareList[i+1].sign) {
+                counter++;
+                if (counter == 5){
+                    console.log("wygrales gosciu horizontal 5!");
+                }
+            }
+            else{
+                counter = 0;
+            }
+            
+        }
+    }
+}       

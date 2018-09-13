@@ -64,6 +64,7 @@ function handleMove(div, squareList) {
         board.setSign(x, y, sign);
         sendBoardJSON(board.squareList);
         sendMadeMove();
+        // board.isWin(sign);
     }
 }
 
