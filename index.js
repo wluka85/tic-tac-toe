@@ -35,7 +35,7 @@ app.post('/api/set-turn', (req, res) => {
     } else {
         app.set('turnSign', "X");
     }
-    res.json({success : 'true'})
+    res.json({success : "true"})
     console.log("Następny ruch: " + app.get('turnSign'));
 });
 

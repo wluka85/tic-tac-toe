@@ -7,10 +7,11 @@ var turn = "";
 
 board.drawBoard();
 
-var button = document.getElementById("refresh");
-button.addEventListener("click", function() {
-    refreshBoard(board);
-});
+// var button = document.getElementById("refresh");
+// button.addEventListener("click", function() {
+//     refreshBoard(board);
+// });
+
 addEventListenerToBoard();
 
 var buttonStartGame = document.getElementById("start-game");
@@ -28,7 +29,20 @@ function startGame() {
         .then((response) => response.json())  // parse JSON format into JS object
         .then((data) => {
             sign = data;
+            
+            if (sign === "X") {
+                document.getElementById("board").setAttribute('class', 'disabled');
+            } else {
+                document.getElementById("board").setAttribute('class', '');
+            }
+
+            setInterval(function() {
+                
+                refreshBoard(board);
+            }, 2000);
         })
+
+
 }
 
 
@@ -86,7 +100,11 @@ function refreshBoard(board) {
                 console.log(data);
                 for (let i=0; i<board.squareList.length; i++) {
                     container[i].innerHTML = data[i].sign;
-                    board.squareList[i].setSign(data[i].sign);
+                    if (board.squareList[i].getSign() != data[i].sign) {
+                        board.squareList[i].setSign(data[i].sign);
+                        document.getElementById("board").setAttribute('class', '');
+                    }
+                    
 
                 }
             })
@@ -127,6 +145,9 @@ function sendMadeMove() {
     })
         .then((response) => response.json())
         .then((data) => {
-
+            
+            if (data.success === "true") {
+                document.getElementById("board").setAttribute('class', 'disabled');
+            }
         })
 }
