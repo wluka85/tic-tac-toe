@@ -22,4 +22,8 @@ export default class Square {
     setSign(sign) {
         this.sign = sign;
     }
+
+    getSign() {
+        return this.sign;
+    }
 }
