@@ -73,13 +73,11 @@ table {
   font-family: Arial, Helvetica, sans-serif
 }
 
-<<<<<<< HEAD
 .field:hover {
 	background: #666;
 	cursor: pointer;
 }
-=======
-}
+
 
 /* Start Page */
 
@@ -199,4 +197,3 @@ img {
 	}
 }
 
->>>>>>> winLogic

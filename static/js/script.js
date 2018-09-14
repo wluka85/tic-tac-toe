@@ -22,6 +22,12 @@ function startGame() {
         .then((data) => {
             sign = data;
 
+            if (sign === "X") {
+                document.getElementById("board").setAttribute('class', 'disabled');
+            } else {
+                document.getElementById("board").setAttribute('class', '');
+            }
+
         })
 }
 
