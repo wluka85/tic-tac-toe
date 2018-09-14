@@ -92,7 +92,7 @@ function refreshBoard(board) {
                     }
 
                 }
-                
+
             })
 }
 
@@ -134,5 +134,9 @@ function handleGameOver(board) {
         window.location.href = "won-game";
     } else if (board.isLost(sign)) {
         window.location.href = "lost-game";
+    } else if (board.isDraw()) {
+        setTimeout(function() {
+            window.location.href = "tic-tac-toe";
+        }, 2000);
     }
 }

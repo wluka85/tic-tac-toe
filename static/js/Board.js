@@ -146,5 +146,18 @@ export default class Board {
         }
     }
 
-   
-}       
+    isDraw() {
+        let counter = 0;
+        this.squareList.forEach(function(square, index) {
+            if(square.sign == "O" || square.sign == "X"){
+                counter++;
+            }
+        });
+
+        return counter == 9;
+
+    }
+
+
+
+}
