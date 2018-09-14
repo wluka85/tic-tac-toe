@@ -78,6 +78,19 @@ table {
 	cursor: pointer;
 }
 
+.disabled .field {
+	background: #666;
+	color: rgb(49, 49, 49);
+  
+  }
+  .disabled .field:hover {
+	cursor: default;
+  }
+  
+  .hidden .field {
+	display: none;
+  }
+
 
 /* Start Page */
 
