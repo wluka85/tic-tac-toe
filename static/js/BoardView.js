@@ -23,7 +23,7 @@ export default class BoardView {
             let container = document.querySelectorAll('.field');
 
             for (let i=0; i<squareList.length; i++) {
-                container[i].innerHTML = squareList[i].getSign();
+                container[i].innerHTML = squareList[i].sign;
             }
             document.getElementById("board").setAttribute('class', '');
     }
