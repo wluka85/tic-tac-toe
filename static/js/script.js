@@ -14,7 +14,7 @@ startGame();
 function startGame() {
     setInterval(function() {
         refreshBoardView();
-        handleGameOver(board);
+        handleGameOver();
     }, 1000);
     fetch('/api/get-sign', {
         method: 'GET',
@@ -24,7 +24,7 @@ function startGame() {
             sign = data.sign;
             id = data.id;
 
-            if (sign === "X") {
+            if (sign === 'X') {
                 document.getElementById("board").setAttribute('class', 'disabled');
             } else {
                 document.getElementById("board").setAttribute('class', '');
@@ -72,12 +72,30 @@ function refreshBoardView() {
         fetch('/api/get-square-list', {
             method: 'POST',
             headers: new Headers({'content-type': 'application/json'}),
+            body: JSON.stringify({playerId: id, playerSign: sign})
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data.squareList);
+                if (data.success === true) {
+                    boardView.refreshBoard(data.squareList);
+                }
+            })
+}
+
+function drawBoardView() {
+        let container = document.querySelectorAll('.field');
+
+        fetch('/api/get-square-list', {
+            method: 'POST',
+            headers: new Headers({'content-type': 'application/json'}),
             body: JSON.stringify({playerId: id})
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log(data.squareList);
                 if (data.success === true) {
-                    boardView.refreshBoard(data.squareList);
+                    boardView.drawBoard(data.squareList);
                 }
             })
 }
@@ -91,7 +109,7 @@ function handleGameOver() {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data.result);
+            // console.log(data.result);
             if (data.result == 'won') {
                 console.log('jestem w wygranej');
                 window.location.href = "won-game";
