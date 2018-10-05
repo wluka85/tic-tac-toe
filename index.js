@@ -35,31 +35,31 @@ app.get('/api/get-sign', (req, res) => {
         sign = gameList[index].getPlayerSign(id);
     }
 
-    console.log('This is player id: ' + id + 'sign: ' + sign);
+    console.log('This is player id: ' + id + ' sign: ' + sign);
 
     app.set('turnSign', 'O');
     app.set('GameIdentifier', {sign, id});
     res.json(app.get('GameIdentifier'));
 });
 
-app.get('/api/check-turn', (req, res) => {
-    let playerId = req.get('playerId');
-    let playerSign = req.get('playerSign');
-    let gameIndex = getIndexOfGame(Number.parseInt(playerId));
+// app.get('/api/check-turn', (req, res) => {
+//     let playerId = req.get('playerId');
+//     let playerSign = req.get('playerSign');
+//     let gameIndex = getIndexOfGame(Number.parseInt(playerId));
+//
+//     console.log('This is player id: ' + playerId + 'and his sign: ' + playerSign);
+//
+//     app.set('turnSign', gameList[gameIndex].turnSign);
+//     res.json(app.get('turnSign'));
+// });
 
-    console.log('This is player id: ' + playerId + 'and his sign: ' + playerSign);
-
-    app.set('turnSign', gameList[gameIndex].turnSign);
-    res.json(app.get('turnSign'));
-});
-
-app.post('/api/set-turn', (req, res) => {
-    let playerSign = req.body.playerSign;
-    let playerId = req.body.playerId;
-    let gameIndex = getIndexOfGame(Number.parseInt(playerId));
-    gameList[gameIndex].setTurnSign(playerSign);
-    res.json({success : 'true'})
-});
+// app.post('/api/set-turn', (req, res) => {
+//     let playerSign = req.body.playerSign;
+//     let playerId = req.body.playerId;
+//     let gameIndex = getIndexOfGame(Number.parseInt(playerId));
+//     gameList[gameIndex].setTurnSign(playerSign);
+//     res.json({success : 'true'})
+// });
 
 app.post('/api/handle-turn', (req, res) => {
     let playerSign = req.body.playerSign;
@@ -83,9 +83,9 @@ app.post('/api/handle-turn', (req, res) => {
 
 app.post('/api/get-square-list', (req, res) => {
     let playerId = req.body.playerId;
-    console.log('Teraz ten błąd: '+ req.body.playerId);
+    // console.log('Player: '+ playerId + 'try handle turn.');
     let gameIndex = getIndexOfGame(Number.parseInt(playerId));
-    console.log('This is game index which you are playing: ' + gameIndex);
+    // console.log('This is game index which you are playing: ' + gameIndex);
     let success = false;
     let squareList;
     if (gameIndex > 0) {
@@ -110,7 +110,7 @@ app.post('/api/check-game-over', (req, res) => {
     } else if (gameList[gameIndex].board.isDraw()) {
         gameResult = 'draw';
     }
-    console.log('Player: ' + playerId + ' Sign: ' + playerSign + ' Game index: ' + gameIndex + 'result: ' + gameResult);
+    // console.log('Player: ' + playerId + ' Sign: ' + playerSign + ' Game index: ' + gameIndex + 'result: ' + gameResult);
     res.json({result: gameResult});
 });
 
@@ -124,44 +124,44 @@ app.get('/won-game', (req, res) => res.sendFile('won.html', { root: '.' }));
 
 app.get('/lost-game', (req, res) => res.sendFile('lost.html', { root: '.' }));
 
-app.post('/api/board', (req, res) => {
-    let board = req.body;
-
-    app.set('board', board);
-    res.json({success : 'true'})
-});
-
-app.get('/api/board', (req, res) => {
-    res.json(app.get('board'))
-});
-
-
-
-
-app.post('/api/turn', (req, res) => {
-    let sign = req.body;
-
-    app.set('sign', sign);
-    res.json({success : 'true'})
-});
-
-app.get('/api/turn', (req, res) => {
-    let sign = JSON.stringify("X")
-    app.set('sign', sign);
-    res.json(app.get('sign'))
-});
-
-
+// app.post('/api/board', (req, res) => {
+//     let board = req.body;
+//
+//     app.set('board', board);
+//     res.json({success : 'true'})
+// });
+//
+// app.get('/api/board', (req, res) => {
+//     res.json(app.get('board'))
+// });
+//
+//
+//
+//
+// app.post('/api/turn', (req, res) => {
+//     let sign = req.body;
+//
+//     app.set('sign', sign);
+//     res.json({success : 'true'})
+// });
+//
+// app.get('/api/turn', (req, res) => {
+//     let sign = JSON.stringify("X")
+//     app.set('sign', sign);
+//     res.json(app.get('sign'))
+// });
 
 
 
 
-app.get('/api/sign', (req, res) => {
-    let count = app.get("count");
-    app.set("count", count++);
-    // ...
-    res.json({})
-});
+
+
+// app.get('/api/sign', (req, res) => {
+//     let count = app.get("count");
+//     app.set("count", count++);
+//     // ...
+//     res.json({})
+// });
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
@@ -180,7 +180,6 @@ function getIndexAvailableGame() {
 }
 
 function getIndexOfGame(playerId) {
-    console.log('teraz: ' + playerId);
     for (let i = 0; i < gameList.length; i++) {
         if (gameList[i].checkPlayerId(playerId)) {
             return i;

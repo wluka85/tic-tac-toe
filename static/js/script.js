@@ -58,8 +58,6 @@ function handleTurn(div) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log('Ok. Im here.');
-            console.log(data.squareList);
             if (data.success === true) {
                 boardView.refreshBoard(data.squareList);
                 document.getElementById("board").setAttribute('class', 'disabled');
@@ -100,7 +98,7 @@ function handleGameOver() {
 
             } else if (data.result == 'lost') {
                 window.location.href = "lost-game";
-                
+
             } else if (data.result == 'draw') {
                 setTimeout(function() {
                     window.location.href = "tic-tac-toe";
