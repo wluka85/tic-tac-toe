@@ -24,7 +24,8 @@ function startGame() {
 
             if (sign === "X") {
                 document.getElementById("board").setAttribute('class', 'disabled');
-                document.body.style.backgroundColor = "#bcc5d4"
+                // document.body.style.backgroundColor = "#bcc5d4"
+                document.body.classList.add("grayed");
             } else {
                 document.getElementById("board").setAttribute('class', '');
 
@@ -87,7 +88,8 @@ function refreshBoard(board) {
                     if (board.squareList[i].getSign() != data[i].sign) {
                         board.squareList[i].setSign(data[i].sign);
                         document.getElementById("board").setAttribute('class', '');
-                        document.body.style.backgroundColor = "white"
+                        // document.body.style.backgroundColor = "white";
+                        document.body.classList.remove("grayed");
                     }
 
                 }
@@ -123,7 +125,8 @@ function sendMadeMove() {
 
             if (data.success === "true") {
                 document.getElementById("board").setAttribute('class', 'disabled');
-                document.body.style.backgroundColor = "#bcc5d4"
+                // document.body.style.backgroundColor = "#bcc5d4"
+                document.body.classList.add("grayed");
             }
         })
 }
@@ -140,3 +143,4 @@ function handleGameOver(board) {
         }, 2000);
     }
 }
+

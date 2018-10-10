@@ -1,11 +1,4 @@
-var divWonLost = document.getElementById('won-lost');
-
 initAnimate();
-
-divWonLost.addEventListener('click', function() {
-    console.log("dfsdfsdfssd");
-    window.location.href = "tic-tac-toe";
-});
 
 function initAnimate() {
     var animateButton = function(e) {
@@ -28,7 +21,7 @@ function initAnimate() {
 
 
     }
-
+    return false;
 
 }
 

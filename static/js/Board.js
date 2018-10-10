@@ -33,7 +33,6 @@ export default class Board {
 
     drawBoard() {
         let container = document.getElementById('board');
-        let squareArray = this.squareList;
         this.squareList.forEach(function(square, index) {
             let div = square.getElement();
             container.appendChild(div);

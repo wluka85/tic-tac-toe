@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <title>TicTacToe</title>
     <link rel="stylesheet" href="/css/style.css">
-    <meta name="viewport" content = "width=device-width", initial-scale="1.0">
+    <script src="js/start.js" type="module" defer></script>
+    <meta name="viewport" content = "width=device-width" initial-scale="1.0">
 
 </head>
 <body class="bodyStart">
@@ -14,30 +15,7 @@
         <img src="/img/unnamed.jpg" alt="logo">
     </div>
 
-    <button onclick="location.href='javascript:delay()'"  class="bubbly-button">Start!</button>
+    <button class="bubbly-button">Start!</button>
 
-    <script>
-        var animateButton = function(e) {
-
-    e.preventDefault;
-    //reset animation
-    e.target.classList.remove('animate');
-
-    e.target.classList.add('animate');
-    setTimeout(function(){
-    e.target.classList.remove('animate');
-    },700);
-    };
-
-    var bubblyButtons = document.getElementsByClassName("bubbly-button");
-
-    for (var i = 0; i < bubblyButtons.length; i++) {
-    bubblyButtons[i].addEventListener('click', animateButton, false);
-    }
-
-    function delay () {
-    setTimeout( function() { window.location = 'start-game' }, 500 );
-    }
-    </script>
 </body>
 </html>
