@@ -28,22 +28,43 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+html {
+	height: 100%;
+}
+
 body {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	line-height: 1;
+	height: 100%;
 }
+.winInfo {
+	color: #285f86;
+	text-shadow: 3px 2px rgba(17, 42, 64, 0.64);
+	font-size: 50px;
+	font-weight: bold;}
 
 #won-lost {
-    /* padding-top: 10%; */
-    margin: auto;
-	margin-top: 20%;
-    color: red;
-    font-size: 50px;
+    color: white;
+    font-size: 30px;
     font-weight: bold;
 }
 
 #won-lost:hover {
 	cursor: pointer;
+}
+@media only screen and (max-width: 210px) {
+	#won-lost {
+		width: 100vw;
+		height: 40vw;
+		font-size: 10px;
+		font-size: 14vw;
+	}
+
+	.winInfo {
+		font-size: 10px;
+		font-size: 24vw;
+	}
 }
