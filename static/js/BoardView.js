@@ -26,6 +26,8 @@ export default class BoardView {
                 container[i].innerHTML = squareList[i].sign;
             }
             document.getElementById("board").setAttribute('class', '');
+            document.body.style.backgroundColor = "white";
+            // document.body.classList.remove("grayed");
     }
 
     getElement(square) {

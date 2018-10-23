@@ -27,8 +27,11 @@ function startGame() {
 
             if (sign === 'X') {
                 document.getElementById("board").setAttribute('class', 'disabled');
+                document.body.style.backgroundColor = "#bcc5d4";
+                document.body.classList.add("grayed");
             } else {
                 document.getElementById("board").setAttribute('class', '');
+
             }
         })
 }
@@ -62,6 +65,8 @@ function handleTurn(div) {
             if (data.success === true) {
                 boardView.refreshBoard(data.squareList);
                 document.getElementById("board").setAttribute('class', 'disabled');
+                document.body.style.backgroundColor = "#bcc5d4";
+                document.body.classList.add("grayed");
             }
         })
 }

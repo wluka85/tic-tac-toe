@@ -20,7 +20,7 @@ export default class Board {
         }
         return squareList;
     };
-
+    
     setSign(x, y, sign) {
         this.squareList.forEach(function(square, index) {
             if(square.x == x && square.y == y) {
