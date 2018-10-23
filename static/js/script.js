@@ -18,6 +18,7 @@ function startGame() {
     }, 1000);
     fetch('/api/get-sign', {
         method: 'GET',
+        credentials: 'include'
     })
         .then((response) => response.json())
         .then((data) => {
