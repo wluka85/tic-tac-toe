@@ -3,18 +3,27 @@ const app = express();
 app.use(express.json());
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
+var uuidV4 = require('uuid/v4');
 
 var Board = require('./static/js/BoardExpress.js');
 var Game = require('./static/js/GameExpress.js');
 var IdGenerator = require('./static/js/IdGeneratorExpress.js');
+var User = require('./static/js/UserExpress.js');
 
 var gameList = new Array();
 var idGenerator = new IdGenerator();
+var userList = new Array();
 
 app.set('GameIdentifier', {});
 
 app.get('/api/get-sign', (req, res) => {
+    let cookie = req.cookies;
+    let userIndex = getUserIndex(cookie.userName);
+    let user = userList[userIndex];
+
     let id = idGenerator.getId();
+    user.addGame(id);
+
     let sign ='';
     let index = getIndexAvailableGame();
     if (index < 0) {
@@ -69,15 +78,67 @@ app.post('/api/check-game-over', (req, res) => {
     let playerSign = req.body.playerSign;
     let gameIndex = getIndexOfGame(Number.parseInt(playerId));
     let gameResult;
+    let user = getUserByGame(Number.parseInt(playerId));
     if (gameList[gameIndex].board.isWin(playerSign)) {
+        user.addScores(1);
         gameResult = 'won';
     } else if (gameList[gameIndex].board.isLost(playerSign)) {
+        user.addScores(-1);
         gameResult = 'lost';
     } else if (gameList[gameIndex].board.isDraw()) {
         gameResult = 'draw';
     }
     res.json({result: gameResult});
 });
+
+app.post('/api/check-user-name', (req, res) => {
+    let userName = req.body.userName;
+    let success = false;
+    if (getUserIndex(userName) < 0) {
+        let uuid = uuidV4();
+        let user = new User(userName, uuid);
+        userList.push(user);
+        res.cookie('userName', userName);
+        res.cookie('uuid', uuid);
+        success = true;
+    }
+    console.log(userList);
+    res.json({success: success});
+});
+
+app.get('/api/get-scores', (req, res) => {
+    res.json({userList: userList});
+});
+
+app.get('/', (req, res) => {
+    // let cookie = req.cookies;
+    // let userIndex = getUserIndex(cookie.userName);
+    // console.log(cookie);
+    // console.log('krok1' + cookie.uuid);
+    // console.log(userIndex);
+    //
+    // if (userIndex > -1 && userList[userIndex].uuid === cookie.uuid) {
+    //     console.log('krok2');
+    //     res.sendFile('start.html', { root: '.' });
+    // }
+    res.sendFile('start-user.html', { root: '.' })
+});
+
+app.get('/api/check-cookie', (req, res) => {
+    let cookie = req.cookies;
+    let userIndex = getUserIndex(cookie.userName);
+    let success = false;
+    console.log(cookie);
+    console.log('krok1' + cookie.uuid);
+    console.log(userIndex);
+
+    if (userIndex > -1 && userList[userIndex].uuid === cookie.uuid) {
+        console.log('krok2');
+        success = true;
+    }
+    res.json({success: success});
+});
+
 
 
 app.get('/tic-tac-toe', (req, res) => res.sendFile('start.html', { root: '.' }));
@@ -87,6 +148,8 @@ app.get('/start-game', (req, res) => res.sendFile('index.html', { root: '.' }));
 app.get('/won-game', (req, res) => res.sendFile('won.html', { root: '.' }));
 
 app.get('/lost-game', (req, res) => res.sendFile('lost.html', { root: '.' }));
+
+app.get('/user-scores', (req, res) => res.sendFile('scores.html', { root: '.' }));
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
 
@@ -112,4 +175,26 @@ function getIndexOfGame(playerId) {
     }
 
     return -1;
+}
+
+function getUserIndex(userName) {
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].userName === userName) {
+            console.log('jest już taki user');
+            return i;
+        }
+    }
+    console.log('nie ma takiego user');
+    return -1;
+}
+
+function getUserByGame(playerId) {
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].checkifContainsPlayerId(playerId)) {
+            return userList[i];
+
+        }
+    }
+
+    return null;
 }
