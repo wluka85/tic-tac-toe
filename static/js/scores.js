@@ -8,7 +8,9 @@ setInterval(function() {
 }, 2000);
 
 setInterval(function() {
-    drawTable();
+    if (userList) {
+        drawTable();
+    }
 
 }, 2000);
 
@@ -30,7 +32,13 @@ function getUserList() {
         })
         .then((response) => response.json())
         .then((data) => {
-            userList = data.userList;
+            // userList = data.userList;
+            userList = [];
+            data.userList.forEach(element => {
+                userList.push({userName: element.userName, scores: element.scores});
+            })
+
+            userList.sort(function(a, b){return b.scores - a.scores});
     })
 
 }
@@ -54,10 +62,13 @@ function addScoreRow(id, userName, scores) {
     let tr = document.createElement('tr');
     tr.setAttribute('class', 'row');
     let td0 = document.createElement('td');
+    td0.setAttribute('class', 'id-column');
     td0.innerHTML = id;
     let td1 = document.createElement('td');
+    td1.setAttribute('class', 'user-name-column');
     td1.innerHTML = userName;
     let td2 = document.createElement('td');
+    td2.setAttribute('class', 'scores-column');
     td2.innerHTML = scores;
     tr.appendChild(td0);
     tr.appendChild(td1);

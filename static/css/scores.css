@@ -1,22 +1,55 @@
 body {
+	margin-top: 0px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 #container {
+	width: 100%;
+	margin-top: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
 
+#title-scores {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #285f86;
+	color: white;
+	width: 100%;
+	margin-top: 0px;
+	padding: 10px;
 }
 
 #scores {
-	border: 1px solid black;
+	border: 1px solid #285f86;
+	width: 500px;
+	font-size: 18px;
 }
 
 th {
     font-weight: bold;
-    border: 1px solid black;
+    border: 1px solid #285f86;
+	background-color: #285f86;
+	color: white;
 }
 
 td {
-	border: 1px solid black;
+	border: 1px solid #285f86;
+}
+
+.id-column {
+	text-align: center;
+}
+
+.user-name-column {
+	padding-left: 10px;
+}
+
+.scores-column {
+	text-align: center;
 }
