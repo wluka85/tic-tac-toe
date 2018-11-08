@@ -102,7 +102,7 @@ app.post('/api/check-user-name', (req, res) => {
         res.cookie('uuid', uuid);
         success = true;
     }
-    console.log(userList);
+
     res.json({success: success});
 });
 
@@ -110,30 +110,14 @@ app.get('/api/get-scores', (req, res) => {
     res.json({userList: userList});
 });
 
-app.get('/', (req, res) => {
-    // let cookie = req.cookies;
-    // let userIndex = getUserIndex(cookie.userName);
-    // console.log(cookie);
-    // console.log('krok1' + cookie.uuid);
-    // console.log(userIndex);
-    //
-    // if (userIndex > -1 && userList[userIndex].uuid === cookie.uuid) {
-    //     console.log('krok2');
-    //     res.sendFile('start.html', { root: '.' });
-    // }
-    res.sendFile('start-user.html', { root: '.' })
-});
+app.get('/', (req, res) => res.sendFile('start-user.html', { root: '.' }));
 
 app.get('/api/check-cookie', (req, res) => {
     let cookie = req.cookies;
     let userIndex = getUserIndex(cookie.userName);
     let success = false;
-    console.log(cookie);
-    console.log('krok1' + cookie.uuid);
-    console.log(userIndex);
 
     if (userIndex > -1 && userList[userIndex].uuid === cookie.uuid) {
-        console.log('krok2');
         success = true;
     }
     res.json({success: success});
@@ -158,7 +142,6 @@ app.use(express.static('static'));
 
 function getIndexAvailableGame() {
     for (let i = 0; i < gameList.length; i++) {
-        console.log(gameList[i].isAvailableGame())
         if (gameList[i].isAvailableGame()) {
             return i;
         }
@@ -180,11 +163,10 @@ function getIndexOfGame(playerId) {
 function getUserIndex(userName) {
     for (let i = 0; i < userList.length; i++) {
         if (userList[i].userName === userName) {
-            console.log('jest już taki user');
             return i;
         }
     }
-    console.log('nie ma takiego user');
+
     return -1;
 }
 

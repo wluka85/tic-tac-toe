@@ -1,24 +1,25 @@
 var userList;
 
-getUserList();
 
 
 setInterval(function() {
-    location.reload();
+    getUserList();
+
+}, 2000);
+
+setInterval(function() {
     drawTable();
 
-}, 1000);
+}, 2000);
 
 function drawTable() {
     let scoresTable = document.getElementById('scores');
-    // let rowList = document.getElementByClassName('row');
-    // for (let i = rowList.length - 1; 0 <= i; i--){
-    //     if (rowList[i] && rowList[i].parentElement)
-    //     rowList[i].parentElement.removeChild(rowList[i]);
-    // }
+    scoresTable.innerHTML = '';
+    scoresTable.appendChild(getTableHeader('id', 'user name', 'scores'));
+    console.log(userList)
     for (let i = 0; i < userList.length; i++) {
 
-        scoresTable.appendChild(addScoreRow(userList[i].userName, userList[i].scores));
+        scoresTable.appendChild(addScoreRow(i+1, userList[i].userName, userList[i].scores));
     }
 }
 
@@ -34,13 +35,31 @@ function getUserList() {
 
 }
 
-function addScoreRow(userName, scores) {
+function getTableHeader(id, userName, scores) {
     let tr = document.createElement('tr');
     tr.setAttribute('class', 'row');
+    let td0 = document.createElement('th');
+    td0.innerHTML = id;
     let td1 = document.createElement('th');
     td1.innerHTML = userName;
     let td2 = document.createElement('th');
     td2.innerHTML = scores;
+    tr.appendChild(td0);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    return tr;
+}
+
+function addScoreRow(id, userName, scores) {
+    let tr = document.createElement('tr');
+    tr.setAttribute('class', 'row');
+    let td0 = document.createElement('td');
+    td0.innerHTML = id;
+    let td1 = document.createElement('td');
+    td1.innerHTML = userName;
+    let td2 = document.createElement('td');
+    td2.innerHTML = scores;
+    tr.appendChild(td0);
     tr.appendChild(td1);
     tr.appendChild(td2);
     return tr;

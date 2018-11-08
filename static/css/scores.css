@@ -7,3 +7,16 @@ body {
 #container {
 
 }
+
+#scores {
+	border: 1px solid black;
+}
+
+th {
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+td {
+	border: 1px solid black;
+}
